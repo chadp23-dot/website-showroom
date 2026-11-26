@@ -52,8 +52,16 @@
         background:var(--orange); color:#fff; font-weight:800; text-decoration:none;
         padding:12px 18px; border-radius:12px; font-size:17px; white-space:nowrap;
       }
-      @media (max-width:760px){ .topnav nav a{padding:12px 6px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav .navcall{padding:12px 12px; font-size:16px;} }
-      @media (max-width:640px){ .topnav{justify-content:space-between; gap:6px;} .topnav nav a:not(.portfolio){display:none;} .topnav nav a.portfolio{font-size:16px; padding:10px 12px;} }
+      @media (max-width:760px){ .topnav nav a{padding:12px 6px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav .navcall{padding:12px 12px; font-size:16px;} .topnav nav a.hideS{display:none;} }
+      @media (max-width:640px){
+        .topnav{justify-content:space-between; gap:6px; padding:0 10px;}
+        .topnav .brand{font-size:18px; letter-spacing:.01em; flex-shrink:1; min-width:0;}
+        .topnav nav{flex-shrink:0;}
+        .topnav nav a:not(.portfolio){display:none;}
+        .topnav nav a.portfolio{font-size:15px; padding:9px 10px; margin:0;}
+        .topnav .navcall{font-size:15px; padding:10px 12px; flex-shrink:0;}
+        .topnav .navcall .navnum{display:none;}
+      }
 
       /* Hero */
       .hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); color:#fff; padding:54px 0 60px;}
@@ -196,12 +204,14 @@
       .backtop{
         position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:55;
         background:var(--orange); color:#fff; text-decoration:none; font-weight:800;
-        writing-mode:vertical-rl; font-family:"Barlow Condensed",sans-serif; letter-spacing:.1em;
-        text-transform:uppercase; font-size:19px; padding:22px 13px;
-        border-radius:14px 0 0 14px; box-shadow:-4px 6px 20px rgba(7,30,66,.4);
-        display:inline-flex; align-items:center; justify-content:center; min-width:48px; min-height:150px;
+        writing-mode:vertical-rl; font-family:"Barlow Condensed",sans-serif; letter-spacing:.08em;
+        text-transform:uppercase; font-size:14px; padding:14px 6px;
+        border-radius:10px 0 0 10px; box-shadow:-3px 4px 14px rgba(7,30,66,.35);
+        display:inline-flex; align-items:center; justify-content:center; width:30px; min-height:104px;
       }
       .backtop:hover{background:var(--orange-dark);}
+      /* Clearance so no headline or copy ever runs underneath the side tab. */
+      @media (max-width:900px){ .wrap{padding-right:48px;} footer .wrap{padding-right:48px;} }
 
       /* Spotlight rows: the two builds, up close */
       .spot{display:grid; grid-template-columns:1fr; gap:22px; align-items:center; margin-top:38px; background:var(--card); border:2px solid var(--line); border-radius:22px; overflow:hidden;}
@@ -246,7 +256,7 @@
         <a href="#offer" class="hideS">The Offer</a>
         <a href="#guarantee" class="hideS">Guarantee</a>
       </nav>
-      <a class="navcall" href="tel:+12012821356">Call 201 282 1356</a>
+      <a class="navcall" href="tel:+12012821356">Call <span class="navnum">201 282 1356</span></a>
     </header>
 
     <!-- HERO: the buyer result comes first -->
