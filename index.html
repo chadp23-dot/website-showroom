@@ -210,8 +210,18 @@
         display:inline-flex; align-items:center; justify-content:center; width:30px; min-height:104px;
       }
       .backtop:hover{background:var(--orange-dark);}
-      /* Clearance so no headline or copy ever runs underneath the side tab. */
-      @media (max-width:900px){ .wrap{padding-right:48px;} footer .wrap{padding-right:48px;} }
+      /* Book now: fixed on the left side, mirror of Back To Top, jumps to the bottom booking section. */
+      .booknow{
+        position:fixed; left:0; top:50%; transform:translateY(-50%); z-index:55;
+        background:var(--orange); color:#fff; text-decoration:none; font-weight:800;
+        writing-mode:vertical-rl; font-family:"Barlow Condensed",sans-serif; letter-spacing:.08em;
+        text-transform:uppercase; font-size:14px; padding:14px 6px;
+        border-radius:0 10px 10px 0; box-shadow:3px 4px 14px rgba(7,30,66,.35);
+        display:inline-flex; align-items:center; justify-content:center; width:30px; min-height:104px;
+      }
+      .booknow:hover{background:var(--orange-dark);}
+      /* Clearance so no headline or copy ever runs underneath the side tabs. */
+      @media (max-width:900px){ .wrap{padding-right:48px; padding-left:48px;} footer .wrap{padding-right:48px; padding-left:48px;} }
 
       /* Spotlight rows: the two builds, up close */
       .spot{display:grid; grid-template-columns:1fr; gap:22px; align-items:center; margin-top:38px; background:var(--card); border:2px solid var(--line); border-radius:22px; overflow:hidden;}
@@ -714,6 +724,8 @@
         <p><a class="footertop" href="#top">Back To Top ↑</a></p>
       </div>
     </footer>
+
+    <a class="booknow" href="#offer" aria-label="Book now, jump to the offer and leave your number form">Book Now ↓</a>
 
     <a class="backtop" href="#top" aria-label="Back to top">Back To Top ↑</a>
 
