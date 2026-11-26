@@ -344,7 +344,17 @@
   .hero .lede,.hero-price,.stack-price{line-height:1.6}
   h1,h2,h3{line-height:1.15}
   .spot-body .spot-line,.problem-card .big,.price{line-height:1.15}
-  .topbar{position:sticky;top:0;z-index:50}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:100}
+  body{padding-top:110px}
+  section[id]{scroll-margin-top:120px}
+  @media (max-width:640px){
+    body{padding-top:114px}
+    section[id]{scroll-margin-top:124px}
+  }
+  @media (max-width:400px){
+    body{padding-top:142px}
+    section[id]{scroll-margin-top:152px}
+  }
   .wrap{padding-left:20px;padding-right:20px}
   .sub,.hero .lede,.story-body,.hero-price,.ps,.ways-note,.video-cap,.btn-note{max-width:min(65ch,100%)}
   .sub,.hero .lede,.story-body,.hero-price,.ps,.ways-note{margin-left:auto;margin-right:auto}
