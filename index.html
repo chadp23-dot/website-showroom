@@ -22,7 +22,7 @@
       body{
         margin:0; background:var(--paper); color:var(--ink);
         font-family:"Barlow",system-ui,sans-serif; font-size:19px; line-height:1.55;
-        text-align:center; padding-top:var(--nav-h);
+        text-align:center;
       }
       img{max-width:100%;}
       h1,h2,h3{font-family:"Barlow Condensed","Barlow",sans-serif; text-transform:uppercase; letter-spacing:.01em; line-height:1.04; margin:0 auto; color:var(--navy-ink);}
@@ -40,10 +40,13 @@
         box-shadow:0 2px 14px rgba(4,18,43,.35);
       }
       .nav-toggle{display:none;}
-      .toprow{
-        display:flex; align-items:center; justify-content:space-between; gap:12px;
+      /* Desktop header row: its own container, never part of the mobile grid. */
+      .desktop-header{
+        display:flex; align-items:center; gap:12px;
         padding:0 16px; width:100%; max-width:100%; height:calc(var(--nav-h) - 2px); min-height:0; min-width:0;
       }
+      /* Mobile header grid: hidden until the 640px breakpoint turns it on. */
+      .mobile-header{display:none;}
       .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:28px; letter-spacing:.05em; text-transform:uppercase; color:#fff; text-decoration:none; white-space:nowrap; flex:0 0 auto; min-width:0; line-height:1;}
       .topnav .brand span{color:var(--orange);}
       .topnav nav.desktopnav{display:flex; gap:8px; align-items:center; justify-content:space-evenly; flex:1 1 auto; flex-wrap:nowrap; min-width:0;}
@@ -60,31 +63,44 @@
         display:inline-flex; align-items:center; justify-content:center; height:40px; flex:0 1 auto; min-width:0;
       }
       .topnav .navcall:hover{background:var(--orange-dark);}
-      .mobilebar{display:none;}
+      .mbtn{display:none;}
       .mobilemenu{display:none;}
       @media (max-width:900px){ .topnav nav.desktopnav a{padding:10px 5px; font-size:15px;} .topnav .brand{font-size:23px;} .topnav nav.desktopnav a.hideS{display:none;} }
       @media (max-width:640px){
-        :root{--nav-h:56px;}
-        .toprow{justify-content:space-between; gap:5px; padding:0 6px; flex-wrap:nowrap; min-width:0;}
-        .topnav .brand{font-size:12px; letter-spacing:.01em; flex:0 1 auto; min-width:0;}
-        .topnav nav.desktopnav,.topnav .navcall{display:none !important;}
-        .mobilebar{display:flex; align-items:center; gap:4px; flex:0 1 auto; min-width:0; flex-wrap:nowrap;}
+        :root{--nav-h:62px;}
+        /* Mobile header: ONE CSS Grid with five direct children:
+           Logo | Portfolio | Book | Phone | Menu.
+           The grid gap is the only spacing rule in this row. The desktop nav and
+           the desktop call button are display:none at this width, so they take
+           no part in the mobile layout at all. */
+        .mobile-header{
+          display:grid;
+          grid-template-columns:minmax(0,1fr) auto auto 36px 36px;
+          align-items:center;
+          gap:8px;
+          padding:12px;
+          width:100%;
+          box-sizing:border-box;
+          height:calc(var(--nav-h) - 2px);
+        }
+        .topnav .brand{font-size:clamp(10.5px,3vw,12.5px); letter-spacing:.005em; min-width:0; overflow:hidden;}
+        .desktop-header{display:none;}
         .mbtn{
-          display:inline-flex; align-items:center; justify-content:center; gap:0;
-          height:34px; min-height:34px; padding:0 6px; border-radius:9px; border:0;
+          display:inline-flex; align-items:center; justify-content:center;
+          height:36px; min-height:36px; padding:0 7px; border-radius:10px; border:0;
           background:var(--orange); color:#fff; text-decoration:none; cursor:pointer;
-          font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:12px;
+          font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:12.5px;
           letter-spacing:.04em; text-transform:uppercase; line-height:1; white-space:nowrap;
-          flex:0 1 auto; min-width:0;
+          min-width:0;
         }
         .mbtn:hover{background:var(--orange-dark); color:#fff;}
-        .mbtn-icon{width:34px; padding:0; flex:0 0 34px;}
-        .mbtn-icon svg{width:17px; height:17px; display:block; flex:none;}
+        .mbtn-icon{width:36px; padding:0;}
+        .mbtn-icon svg{width:18px; height:18px; display:block; flex:none;}
         /* The checkbox itself is the visible hamburger button: orange, white lines, directly tappable */
         .nav-toggle{
-          display:block; position:static; flex:0 0 34px; min-width:0;
-          width:34px; height:34px; min-height:34px; margin:0; padding:0; cursor:pointer;
-          appearance:none; -webkit-appearance:none; border:0; border-radius:9px;
+          display:block; position:static; min-width:0;
+          width:36px; height:36px; min-height:36px; margin:0; padding:0; cursor:pointer;
+          appearance:none; -webkit-appearance:none; border:0; border-radius:10px;
           background-color:var(--orange);
           background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 7h16M4 12h16M4 17h16' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
           background-repeat:no-repeat; background-position:center; background-size:18px 18px;
@@ -108,22 +124,27 @@
         .mobilemenu a:hover,.mobilemenu a:focus{background:var(--orange-dark); color:#fff;}
         .topnav:has(.nav-toggle:checked) .mobilemenu{display:flex;}
       }
+      /* Narrow phones: intentional shrink step so the grid never overflows */
       @media (max-width:380px){
-        .toprow{padding:0 5px; gap:4px;}
-        .topnav .brand{font-size:11px;}
-        .mobilebar{gap:3px;}
-        .mbtn{height:32px; min-height:32px; padding:0 5px; font-size:11px; border-radius:8px;}
-        .mbtn-icon{width:32px; flex-basis:32px; padding:0;}
-        .nav-toggle{width:32px; height:32px; min-height:32px; flex-basis:32px; border-radius:8px;}
+        .mobile-header{gap:6px; padding:10px; grid-template-columns:minmax(0,1fr) auto auto 34px 34px;}
+        .topnav .brand{font-size:11px; letter-spacing:0;}
+        .mbtn{height:34px; min-height:34px; padding:0 7px; font-size:12px; border-radius:9px;}
+        .mbtn-icon{width:34px; padding:0;}
+        .nav-toggle{width:34px; height:34px; min-height:34px; border-radius:9px;}
+      }
+      @media (max-width:340px){
+        .mobile-header{gap:5px; padding:9px;}
+        .topnav .brand{font-size:10.5px;}
+        .mbtn{padding:0 6px; font-size:11.5px;}
       }
 
       /* Hero */
-      .hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); color:#fff; padding:54px 0 60px;}
+      .hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); color:#fff; padding:calc(var(--nav-h) + 54px) 0 60px;}
       .hero-start{display:flex; flex-direction:column; align-items:center; margin:0 auto 18px;}
       .hero-kicker{font-family:"Barlow Condensed",sans-serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-size:19px; line-height:1.2; margin:0 auto;}
       .hero-rule{width:56px; height:2px; background:var(--gold); margin:10px auto 0;}
       @media (max-width:640px){
-        .hero{padding:30px 0 60px;}
+        .hero{padding:calc(var(--nav-h) + 30px) 0 60px;}
         .hero-start{margin-bottom:14px;}
         .hero-kicker{font-size:17px;}
       }
@@ -325,7 +346,7 @@
   <body id="top">
 
     <header class="topnav">
-      <div class="toprow">
+      <div class="desktop-header">
         <a class="brand" href="#top">FIVE SECOND <span>HOOK</span></a>
         <nav class="desktopnav" aria-label="Primary">
           <a class="portfolio" href="#work">Portfolio</a>
@@ -337,11 +358,12 @@
           <a class="portfolio booknav" href="#callback">Book</a>
         </nav>
         <a class="navcall" href="tel:+12012821356"><span class="navword">Call&nbsp;</span><span class="navnum">201 282 1356</span></a>
-        <div class="mobilebar" aria-label="Quick actions">
-          <a class="mbtn" href="#work">Portfolio</a>
-          <a class="mbtn" href="#callback">Book</a>
-          <a class="mbtn mbtn-icon" href="tel:+12012821356" aria-label="Call 201 282 1356"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3h3l1.5 4.5-2.1 1.6a12.6 12.6 0 0 0 5.9 5.9l1.6-2.1L21 14.4v3A2.6 2.6 0 0 1 18.3 20C10 19.4 4.6 14 4 5.7A2.6 2.6 0 0 1 6.6 3Z" fill="#fff"/></svg></a>
-        </div>
+      </div>
+      <div class="mobile-header">
+        <a class="brand" href="#top">FIVE SECOND <span>HOOK</span></a>
+        <a class="mbtn" href="#work">Portfolio</a>
+        <a class="mbtn" href="#callback">Book</a>
+        <a class="mbtn mbtn-icon" href="tel:+12012821356" aria-label="Call 201 282 1356"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3h3l1.5 4.5-2.1 1.6a12.6 12.6 0 0 0 5.9 5.9l1.6-2.1L21 14.4v3A2.6 2.6 0 0 1 18.3 20C10 19.4 4.6 14 4 5.7A2.6 2.6 0 0 1 6.6 3Z" fill="#fff"/></svg></a>
         <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Open menu" />
       </div>
       <nav class="mobilemenu" aria-label="Sections">
