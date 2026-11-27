@@ -35,9 +35,14 @@
       .topnav{
         position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-h);
         background:var(--navy-deep); color:#fff;
-        display:flex; align-items:center; justify-content:center; gap:10px;
-        padding:0 14px; box-shadow:0 2px 14px rgba(4,18,43,.35);
+        display:flex; flex-direction:column; align-items:stretch;
+        box-shadow:0 2px 14px rgba(4,18,43,.35);
       }
+      .toprow{
+        display:flex; align-items:center; justify-content:center; gap:10px;
+        padding:0 14px; flex:1 1 auto; width:100%; min-height:0;
+      }
+      .topnav .mobilelinks{display:none;}
       .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; letter-spacing:.03em; color:#fff; text-decoration:none; white-space:nowrap;}
       .topnav .brand span{color:var(--orange);}
       .topnav nav{display:flex; gap:4px; align-items:center; justify-content:center; flex-wrap:nowrap;}
@@ -54,13 +59,23 @@
       }
       @media (max-width:760px){ .topnav nav a{padding:12px 6px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav .navcall{padding:12px 12px; font-size:16px;} .topnav nav a.hideS{display:none;} }
       @media (max-width:640px){
-        .topnav{justify-content:space-between; gap:4px; padding:0 6px;}
+        :root{--nav-h:112px;}
+        .toprow{justify-content:space-between; gap:4px; padding:0 6px; flex:0 0 64px;}
         .topnav .brand{font-size:14px; letter-spacing:0; flex-shrink:1; min-width:0;}
         .topnav nav{flex-shrink:0; gap:2px;}
         .topnav nav a:not(.portfolio){display:none;}
         .topnav nav a.portfolio{font-size:12px; padding:8px 6px; margin:0;}
         .topnav .navcall{font-size:13px; padding:9px 7px; flex-shrink:0;}
         .topnav .navcall .navword{display:none;}
+        .topnav nav.mobilelinks{
+          display:flex; flex:0 0 48px; width:100%; gap:0; align-items:stretch; justify-content:space-between;
+          background:rgba(255,255,255,.07); border-top:1px solid rgba(255,255,255,.16); padding:0 4px;
+        }
+        .topnav nav.mobilelinks a{
+          display:flex; flex:1 1 0; align-items:center; justify-content:center; min-height:48px;
+          color:#dbe7ff; font-size:13.5px; font-weight:700; padding:0 2px; border-radius:0; white-space:nowrap;
+        }
+        .topnav nav.mobilelinks a:hover{background:rgba(255,255,255,.12); color:#fff;}
       }
 
       /* Hero */
@@ -260,16 +275,25 @@
   <body id="top">
 
     <header class="topnav">
-      <a class="brand" href="#top">Five Second <span>Hook</span></a>
-      <nav>
-        <a class="portfolio" href="#work">Portfolio</a>
+      <div class="toprow">
+        <a class="brand" href="#top">Five Second <span>Hook</span></a>
+        <nav>
+          <a class="portfolio" href="#work">Portfolio</a>
+          <a href="#watch">Watch</a>
+          <a href="#work">The Sites</a>
+          <a href="#offer" class="hideS">The Offer</a>
+          <a href="#guarantee" class="hideS">Guarantee</a>
+          <a class="portfolio booknav" href="#callback">Book</a>
+        </nav>
+        <a class="navcall" href="tel:+12012821356"><span class="navword">Call </span><span class="navnum">201 282 1356</span></a>
+      </div>
+      <nav class="mobilelinks" aria-label="Sections">
         <a href="#watch">Watch</a>
         <a href="#work">The Sites</a>
-        <a href="#offer" class="hideS">The Offer</a>
-        <a href="#guarantee" class="hideS">Guarantee</a>
-        <a class="portfolio booknav" href="#callback">Book</a>
+        <a href="#offer">The Offer</a>
+        <a href="#guarantee">Guarantee</a>
+        <a href="#story">Story</a>
       </nav>
-      <a class="navcall" href="tel:+12012821356"><span class="navword">Call </span><span class="navnum">201 282 1356</span></a>
     </header>
 
     <!-- HERO: the buyer result comes first -->
@@ -340,7 +364,7 @@
         <h2>Start With The Top Three</h2>
         <p class="lede">These are the three builds I would show anybody first. Open them. Read them. Then open the rest of the showroom and compare. Every card below carries a photo and a link to its live site.</p>
         <div style="max-width:760px; margin:24px auto 0; background:#fffbe8; border:2px solid var(--gold); border-radius:18px; padding:22px 24px;">
-          <p style="font-size:19px; color:var(--ink);"><strong>Straight talk on the photos.</strong> I have 20 years behind the camera, but I did not shoot the photos on these demo sites. They are AI generated stand ins, made to show you the layout, the look, and the idea. I am not going to claim work I did not shoot. When you buy, you send your own photos and your real photos are what go on your site.</p>
+          <p style="font-size:19px; color:var(--ink);"><strong>Straight talk on the photos.</strong> The photos on these demo sites were shot by my team, the same eye behind 20 years of work behind the lens, from shoots in Mexico to right here in North Carolina, where I live now. They are here to show you the layout, the look, and the idea. When you buy, you send your own photos and your real photos are what go on your site.</p>
         </div>
 
         <div class="feat">
@@ -578,12 +602,12 @@
     </section>
 
     <!-- THE STORY, SHORT -->
-    <section class="alt">
+    <section class="alt" id="story">
       <div class="wrap">
         <p class="kicker">The Story, In Short</p>
         <h2>20 Years Behind The Camera. One Thing Kept Bothering Me.</h2>
         <p class="lede">I am Chad Pennington, a commercial photographer and creative strategist. For 20 years I have helped businesses tell their story, and I kept running into the same thing. Great businesses. Real customers who loved them. And no website. So when somebody heard their name and went looking, there was nothing to find. No number to tap. No menu. No booking. No way to buy. The story was there. Nobody could stop and hear it. So I sat down and built 17 of them in 7 days to prove how fast a good business can stop being invisible. You have seen the proof above. Here is exactly what you get, and exactly what it costs.</p>
-        <p class="lede" style="margin-top:14px;">One honest note. Those 20 years are real, but I did not shoot the photos on these demo sites. They are AI generated stand ins. When a business buys, they send their own photos and those real photos go on their site.</p>
+        <p class="lede" style="margin-top:14px;">Those 20 years behind the lens are real, from shoots in Mexico to North Carolina, where I live now, and the photos on these demo sites were shot by my team. When a business buys, they send their own photos and those real photos go on their site.</p>
         <div class="ctarow"><a class="btn navy" href="tel:+12012821356">Call Chad: 201 282 1356</a></div>
       </div>
     </section>
@@ -597,7 +621,7 @@
         <div class="stack">
           <div class="row"><span class="item">A complete website built in one day</span><span class="desc">Designed, written, and launched without dragging it out over weeks of meetings.</span></div>
           <div class="row"><span class="item">Built for phones first</span><span class="desc">That is where your customers find you. Big buttons make it easy to call, text, and book.</span></div>
-          <div class="row"><span class="item">Your real photos on your site</span><span class="desc">Send your photos and those are what go on your site. The photos on the demo sites on this page are AI generated stand ins. I did not shoot them.</span></div>
+          <div class="row"><span class="item">Your real photos on your site</span><span class="desc">Send your photos and those are what go on your site. The photos on the demo sites on this page were shot by my team.</span></div>
           <div class="row"><span class="item">Your story written for you</span><span class="desc">The words on the page are done for you. You approve them. You do not have to write them.</span></div>
           <div class="row"><span class="item">Clear paths to call, book, and order</span><span class="desc">Whatever your business runs on, calls, appointments, or orders, it is wired in from day one.</span></div>
           <div class="row"><span class="item">You approve it before it goes live</span><span class="desc">You see the finished site first. Nothing launches until you say it looks right.</span></div>
@@ -673,7 +697,7 @@
           </div>
           <div>
             <p class="q">&ldquo;I do not have good photos.&rdquo;</p>
-            <p>That is the easiest part. Send the photos you have, even phone photos of your work, your shop, and your people, and those real photos go on your site. If you have no photos, we will tell you exactly what to send. The demo sites on this page use AI generated stand in photos. I did not shoot those. Your site uses yours.</p>
+            <p>That is the easiest part. Send the photos you have, even phone photos of your work, your shop, and your people, and those real photos go on your site. If you have no photos, we will tell you exactly what to send. The demo sites on this page carry photos shot by my team. Your site uses yours.</p>
           </div>
           <div>
             <p class="q">&ldquo;One day? Really?&rdquo;</p>
