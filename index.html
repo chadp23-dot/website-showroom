@@ -36,16 +36,17 @@
       .topnav{
         position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-h);
         background:var(--navy-deep); color:#fff;
+        border-bottom:2px solid var(--orange);
         box-shadow:0 2px 14px rgba(4,18,43,.35);
       }
       .nav-toggle{display:none;}
       .toprow{
         display:flex; align-items:center; justify-content:space-between; gap:12px;
-        padding:0 16px; width:100%; max-width:100%; height:var(--nav-h); min-height:0;
+        padding:0 16px; width:100%; max-width:100%; height:calc(var(--nav-h) - 2px); min-height:0; min-width:0;
       }
-      .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; letter-spacing:.03em; color:#fff; text-decoration:none; white-space:nowrap; flex:0 0 auto; line-height:1;}
+      .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:28px; letter-spacing:.05em; text-transform:uppercase; color:#fff; text-decoration:none; white-space:nowrap; flex:0 0 auto; min-width:0; line-height:1;}
       .topnav .brand span{color:var(--orange);}
-      .topnav nav.desktopnav{display:flex; gap:2px; align-items:center; justify-content:center; flex:1 1 auto; flex-wrap:nowrap; min-width:0;}
+      .topnav nav.desktopnav{display:flex; gap:8px; align-items:center; justify-content:space-evenly; flex:1 1 auto; flex-wrap:nowrap; min-width:0;}
       .topnav nav.desktopnav a{color:#dbe7ff; text-decoration:none; font-weight:600; font-size:16px; padding:10px 9px; border-radius:10px; white-space:nowrap; display:inline-flex; align-items:center; height:40px;}
       .topnav nav.desktopnav a:hover{background:rgba(255,255,255,.12); color:#fff;}
       .topnav nav.desktopnav a.portfolio{
@@ -56,31 +57,32 @@
       .topnav .navcall{
         background:var(--orange); color:#fff; font-weight:800; text-decoration:none;
         padding:0 16px; border-radius:10px; font-size:17px; white-space:nowrap;
-        display:inline-flex; align-items:center; justify-content:center; height:40px; flex:0 0 auto;
+        display:inline-flex; align-items:center; justify-content:center; height:40px; flex:0 1 auto; min-width:0;
       }
       .topnav .navcall:hover{background:var(--orange-dark);}
       .mobilebar{display:none;}
       .mobilemenu{display:none;}
-      @media (max-width:900px){ .topnav nav.desktopnav a{padding:10px 5px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav nav.desktopnav a.hideS{display:none;} }
+      @media (max-width:900px){ .topnav nav.desktopnav a{padding:10px 5px; font-size:15px;} .topnav .brand{font-size:23px;} .topnav nav.desktopnav a.hideS{display:none;} }
       @media (max-width:640px){
         :root{--nav-h:56px;}
-        .toprow{justify-content:space-between; gap:6px; padding:0 50px 0 8px; flex-wrap:nowrap;}
-        .topnav .brand{font-size:14px; letter-spacing:0; flex:0 0 auto;}
+        .toprow{justify-content:space-between; gap:5px; padding:0 6px; flex-wrap:nowrap; min-width:0;}
+        .topnav .brand{font-size:12px; letter-spacing:.01em; flex:0 1 auto; min-width:0;}
         .topnav nav.desktopnav,.topnav .navcall{display:none !important;}
-        .mobilebar{display:flex; align-items:center; gap:5px; flex:0 0 auto; flex-wrap:nowrap;}
+        .mobilebar{display:flex; align-items:center; gap:4px; flex:0 1 auto; min-width:0; flex-wrap:nowrap;}
         .mbtn{
           display:inline-flex; align-items:center; justify-content:center; gap:0;
-          height:34px; min-height:34px; padding:0 8px; border-radius:9px; border:0;
+          height:34px; min-height:34px; padding:0 6px; border-radius:9px; border:0;
           background:var(--orange); color:#fff; text-decoration:none; cursor:pointer;
           font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:12px;
           letter-spacing:.04em; text-transform:uppercase; line-height:1; white-space:nowrap;
+          flex:0 1 auto; min-width:0;
         }
         .mbtn:hover{background:var(--orange-dark); color:#fff;}
         .mbtn-icon{width:34px; padding:0; flex:0 0 34px;}
         .mbtn-icon svg{width:17px; height:17px; display:block; flex:none;}
         /* The checkbox itself is the visible hamburger button: orange, white lines, directly tappable */
         .nav-toggle{
-          display:block; position:absolute; top:11px; right:8px; z-index:2;
+          display:block; position:static; flex:0 0 34px; min-width:0;
           width:34px; height:34px; min-height:34px; margin:0; padding:0; cursor:pointer;
           appearance:none; -webkit-appearance:none; border:0; border-radius:9px;
           background-color:var(--orange);
@@ -104,22 +106,33 @@
           padding:0 12px; border-radius:9px; background:var(--orange); white-space:nowrap;
         }
         .mobilemenu a:hover,.mobilemenu a:focus{background:var(--orange-dark); color:#fff;}
-        .nav-toggle:checked ~ .mobilemenu{display:flex;}
+        .topnav:has(.nav-toggle:checked) .mobilemenu{display:flex;}
       }
       @media (max-width:380px){
-        .toprow{padding-right:46px; gap:5px;}
-        .topnav .brand{font-size:13px;}
-        .mobilebar{gap:4px;}
-        .mbtn{height:32px; min-height:32px; padding:0 6px; font-size:11px; border-radius:8px;}
+        .toprow{padding:0 5px; gap:4px;}
+        .topnav .brand{font-size:11px;}
+        .mobilebar{gap:3px;}
+        .mbtn{height:32px; min-height:32px; padding:0 5px; font-size:11px; border-radius:8px;}
         .mbtn-icon{width:32px; flex-basis:32px; padding:0;}
-        .nav-toggle{width:32px; height:32px; min-height:32px; top:12px; right:6px; border-radius:8px;}
+        .nav-toggle{width:32px; height:32px; min-height:32px; flex-basis:32px; border-radius:8px;}
       }
 
       /* Hero */
       .hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); color:#fff; padding:54px 0 60px;}
+      .hero-start{display:flex; flex-direction:column; align-items:center; margin:0 auto 18px;}
+      .hero-kicker{font-family:"Barlow Condensed",sans-serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-size:19px; line-height:1.2; margin:0 auto;}
+      .hero-rule{width:56px; height:2px; background:var(--gold); margin:10px auto 0;}
+      @media (max-width:640px){
+        .hero{padding:30px 0 60px;}
+        .hero-start{margin-bottom:14px;}
+        .hero-kicker{font-size:17px;}
+      }
       .hero h1{color:#fff; font-size:clamp(44px,8.5vw,84px); font-weight:800; max-width:940px;}
       .hero h1 .hl{color:var(--gold);}
       .hero .sub{color:#d7e4ff; font-size:clamp(19px,2.6vw,24px); max-width:760px; margin-top:20px;}
+      .hero .hero-offer{color:#fff; font-weight:700; font-size:clamp(19px,2.6vw,23px); max-width:840px; margin-top:20px; background:rgba(255,255,255,.08); border:2px solid var(--gold); border-radius:14px; padding:16px 20px;}
+      .hero .hero-offer b{color:var(--gold);}
+      .hero .hero-offer a{color:var(--gold); font-weight:800; white-space:nowrap;}
       .hero .proofline{margin-top:22px; font-weight:700; color:#fff; font-size:clamp(18px,2.4vw,22px);}
       .hero .proofline b{color:var(--gold);}
       .ctarow{display:flex; gap:14px; justify-content:center; align-items:center; flex-wrap:wrap; margin-top:30px;}
@@ -312,9 +325,8 @@
   <body id="top">
 
     <header class="topnav">
-      <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Open menu" />
       <div class="toprow">
-        <a class="brand" href="#top">Five Second <span>Hook</span></a>
+        <a class="brand" href="#top">FIVE SECOND <span>HOOK</span></a>
         <nav class="desktopnav" aria-label="Primary">
           <a class="portfolio" href="#work">Portfolio</a>
           <a href="#watch">Watch</a>
@@ -330,6 +342,7 @@
           <a class="mbtn" href="#callback">Book</a>
           <a class="mbtn mbtn-icon" href="tel:+12012821356" aria-label="Call 201 282 1356"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3h3l1.5 4.5-2.1 1.6a12.6 12.6 0 0 0 5.9 5.9l1.6-2.1L21 14.4v3A2.6 2.6 0 0 1 18.3 20C10 19.4 4.6 14 4 5.7A2.6 2.6 0 0 1 6.6 3Z" fill="#fff"/></svg></a>
         </div>
+        <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Open menu" />
       </div>
       <nav class="mobilemenu" aria-label="Sections">
         <a href="#watch">Watch</a>
@@ -343,7 +356,12 @@
     <!-- HERO: the buyer result comes first -->
     <div class="hero">
       <div class="wrap">
+        <div class="hero-start">
+          <p class="hero-kicker">Websites Built In One Day</p>
+          <div class="hero-rule" aria-hidden="true"></div>
+        </div>
         <h1>Somebody Searches Your Business Tonight. <span class="hl">This Is What They Should Find.</span></h1>
+        <p class="hero-offer">One day websites for businesses that need to be found. Builds start at <b>$500</b>. Under We Manage It, maintenance is $49 a month for 12 months. Under You Manage It, the site is yours outright for $1,000. Call Chad at <a href="tel:+12012821356">201 282 1356</a>.</p>
         <p class="sub">Your name. Your real photos. Your story. And one big button to call, book, or order. A complete website for your business, built in one day, that turns a search into a customer.</p>
         <p class="proofline">Proof, not promises. <b>I built 17 websites in 7 days.</b> Every one of them is on this page for you to open and judge yourself.</p>
         <div class="ctarow">
@@ -673,39 +691,52 @@
         <div style="max-width:760px; margin:24px auto 0; background:var(--card); border:2px solid var(--line); border-radius:18px; padding:22px 24px;">
           <p style="font-size:19px; color:var(--ink);"><strong>You do not need a long briefing, and you do not need to write anything.</strong> Just send the basic information about your business, your name, what you sell, where you are, and how customers reach you. Send pictures if you have them. That is enough to start. I write the words and the copy for you, and you approve it before anything goes live.</p>
         </div>
-        <p class="lede" style="margin-top:22px;">Your price is <span class="mark">$500 while we keep it running</span>, or <span class="mark">$1,000 and it is yours outright</span>. Both options are right below, in plain sight. Nothing is hidden behind a call.</p>
+        <p class="lede" style="margin-top:22px;">Your price is <span class="mark">$500 under We Manage It</span>, or <span class="mark">$1,000 under You Manage It and it is yours outright</span>. Both options are right below, in plain sight. Nothing is hidden behind a call.</p>
 
         <div class="ways" id="ways">
           <div class="way">
-            <span class="wlabel">Way One</span>
+            <span class="wlabel">We Manage It</span>
             <h3>We Keep It Running</h3>
             <div class="price">$500</div>
-            <p><strong style="color:var(--navy-ink);">Plus maintenance: $49 a month for a year</strong> if you pay the $500 in full, or <strong style="color:var(--navy-ink);">$100 a month for a year</strong> if you pay the $500 in payments.</p>
-            <p>Here is the total, plain. Pay the $500 build in full and your total for the year is $1,088. That is $500 for the build plus $49 a month for 12 months, which is $588. Pay the $500 build in payments and your total for the year is $1,700. That is $500 for the build plus $100 a month for 12 months, which is $1,200. No math to do. No other fee hiding behind it.</p>
-            <p>You get your site built in a day and we stay on it with you. Updates, changes, and keeping it live and working are all handled. Pay for the build in one payment or spread it out in payments. Either way you never have to think about the website again.</p>
+            <p><strong style="color:var(--navy-ink);">$500 website build.</strong> Pay $500 upfront or two payments of $250, with the balance due before launch.</p>
+            <p>Here is the total, plain. Maintenance is $49 a month for 12 months, so your first year total is $1,088. That is $500 for the build plus $588 for the year of maintenance. Alternatively, pay $1,000 upfront for the website build and the first year of maintenance. No math to do. No other fee hiding behind it.</p>
+            <p>You get your site built in a day and we stay on it with you. Updates, changes, and keeping it live and working are all handled. Either way you never have to think about the website again.</p>
             <ul>
               <li>Build in one day with the same full list</li>
-              <li>Pay the $500 build in full, and maintenance is $49 a month for a year</li>
-              <li>Pay the $500 build in payments, and maintenance is $100 a month for a year</li>
+              <li>Pay $500 upfront or two payments of $250, balance due before launch</li>
+              <li>Maintenance is $49 a month for 12 months</li>
+              <li>First year total $1,088</li>
+              <li>Or $1,000 upfront for the build and the first year of maintenance</li>
               <li>Ongoing care handled for you</li>
             </ul>
-            <a class="btn navy" href="tel:+12012821356">Start With Way One: Call</a>
+            <a class="btn navy" href="tel:+12012821356">Start With We Manage It: Call</a>
           </div>
           <div class="way best">
-            <span class="wlabel">Way Two</span>
+            <span class="wlabel">You Manage It</span>
             <h3>Take It Yourself</h3>
             <div class="price">$1,000</div>
-            <p>No maintenance fee. Nothing ongoing. Ever.</p>
-            <p>You get the same site built the same day and then it is yours outright. We hand you the keys and it belongs to your business. Full stop. If you like owning your things free and clear, this is your way.</p>
+            <p><strong style="color:var(--navy-ink);">$1,000 one time build payment.</strong> No maintenance fees from Five Second Hook. Nothing ongoing. Ever.</p>
+            <p>You get the same site built the same day and then it is yours outright. The website files and ownership are handed over and it belongs to your business. Full stop. You are responsible for domain registration, hosting and future maintenance. If you like owning your things free and clear, this is your way.</p>
             <ul>
               <li>Build in one day with the same full list</li>
-              <li>Yours outright with no maintenance fee</li>
-              <li>Nothing ongoing, ever</li>
+              <li>Website files and ownership handed over</li>
+              <li>No maintenance fees from Five Second Hook</li>
+              <li>Domain registration, hosting and future maintenance are yours to handle</li>
             </ul>
-            <a class="btn" href="tel:+12012821356">Start With Way Two: Call</a>
+            <a class="btn" href="tel:+12012821356">Start With You Manage It: Call</a>
           </div>
         </div>
-        <p class="lede" style="margin-top:22px;">We will walk through both ways on a quick call and you pick the one that fits. Would you be interested in seeing what I have in mind for your business?</p>
+        <p class="lede" style="margin-top:22px;"><strong style="color:var(--navy-ink);">Customers own their completed websites under both options once agreed payments are satisfied, subject to applicable third party licenses.</strong></p>
+        <div style="max-width:760px; margin:24px auto 0; background:var(--card); border:2px solid var(--line); border-radius:18px; padding:22px 24px;">
+          <h3 style="font-size:30px; margin-bottom:10px;">What Maintenance Covers</h3>
+          <p style="font-size:19px; color:var(--ink);">Maintenance includes standard domain registration, hosting, SSL, website monitoring, routine technical troubleshooting, and up to 15 minutes of minor content updates monthly. Unused time does not accumulate. Additional work requires a separate quote and customer approval. After 12 months, customers can renew for $49 monthly or $500 annually, or take over management of their own website.</p>
+        </div>
+        <div style="max-width:760px; margin:24px auto 0; background:var(--card); border:2px solid var(--line); border-radius:18px; padding:22px 24px;">
+          <h3 style="font-size:30px; margin-bottom:10px;">Delivery And Approval</h3>
+          <p style="font-size:19px; color:var(--ink);">Same day delivery begins when required business information, content, payments and approvals are received and an agreed production slot is available. The standard build is one static page with up to six sections and one consolidated revision round.</p>
+          <p style="font-size:19px; color:var(--ink); margin-top:12px;">You see your finished site before it goes live and before you commit to it. You approve it before it launches. One consolidated revision round is included. No website launches without customer approval.</p>
+        </div>
+        <p class="lede" style="margin-top:22px;">We will walk through both options on a quick call and you pick the one that fits. Would you be interested in seeing what I have in mind for your business?</p>
       </div>
     </section>
 
@@ -717,7 +748,7 @@
         <p class="lede">Every build is done by me personally from start to finish and turned around in a day.</p>
         <div class="guarantee">
           <h3 style="font-size:32px; margin-bottom:10px;">The See It First Guarantee</h3>
-          <p><span class="mark">You see your finished site before it goes live and before you commit to it.</span> If you do not love it, we keep working until you do. You are not buying a promise and hoping. You approve the real thing with your name on it first. The risk sits with me, not you.</p>
+          <p><span class="mark">You see your finished site before it goes live and before you commit to it.</span> You approve it before it launches. One consolidated revision round is included. No website launches without customer approval. You are not buying a promise and hoping. You approve the real thing with your name on it first. The risk sits with me, not you.</p>
         </div>
         <div class="ctarow">
           <a class="btn" href="tel:+12012821356">Call Chad: 201 282 1356</a>
@@ -733,7 +764,7 @@
         <div class="faq">
           <div>
             <p class="q">&ldquo;What does it actually cost?&rdquo;</p>
-            <p>It is right on this page with no games. Way One is $500 for the build and we keep it running for you. Maintenance is $49 a month for a year if you pay the $500 in full, or $100 a month for a year if you pay the $500 in payments. Way Two is $1,000 and the site is yours outright with no maintenance fee and nothing ongoing. That is every dollar. There is no surprise charge later.</p>
+            <p>It is right on this page with no games. We Manage It is a $500 website build. Pay $500 upfront or two payments of $250, with the balance due before launch. Maintenance is $49 a month for 12 months, for a first year total of $1,088. Or pay $1,000 upfront for the website build and the first year of maintenance. You Manage It is $1,000 one time, the website files and ownership are handed over, and there are no maintenance fees from Five Second Hook. Customers own their completed websites under both options once agreed payments are satisfied, subject to applicable third party licenses. That is every dollar. There is no surprise charge later.</p>
           </div>
           <div>
             <p class="q">&ldquo;I already have Facebook.&rdquo;</p>
@@ -749,7 +780,7 @@
           </div>
           <div>
             <p class="q">&ldquo;What happens after it is built?&rdquo;</p>
-            <p>That is what the two ways are for. With Way One at $500 we keep it running for you. Maintenance is $49 a month for a year if you paid in full, or $100 a month for a year if you paid in payments, and you never think about it again. With Way Two at $1,000 the site is yours outright with no maintenance fee and nothing ongoing. Either way you approve it before it goes live.</p>
+            <p>That is what the two options are for. With We Manage It at $500 for the build, we keep it running for you at $49 a month for 12 months, and you never think about it again. Maintenance includes standard domain registration, hosting, SSL, website monitoring, routine technical troubleshooting, and up to 15 minutes of minor content updates monthly. After 12 months you can renew for $49 monthly or $500 annually, or take over management of your own website. With You Manage It at $1,000 one time, the website files and ownership are handed over, there are no maintenance fees from Five Second Hook, and you are responsible for domain registration, hosting and future maintenance. Either way you approve it before it goes live, and no website launches without customer approval.</p>
           </div>
         </div>
         <div class="ctarow"><a class="btn navy" href="tel:+12012821356">Call Chad: 201 282 1356</a></div>
@@ -766,7 +797,7 @@
           <a class="btn" href="tel:+12012821356">Call Chad: 201 282 1356</a>
         </div>
         <p class="lede" style="margin-top:18px;">$500 while we keep it running, or $1,000 and it is yours outright.</p>
-        <p class="lede" style="text-align:center;"><strong style="color:#fff;">P.S.</strong> Here is the whole offer in one line. You get a real website for your business, built in one day with your photos and your story, and approved by you before it goes live. Pay $500 and we keep it running with maintenance at $49 a month for a year if you pay in full, or $100 a month for a year if you pay in payments. Or pay $1,000 and it is yours outright with nothing ongoing. The only step is the call.</p>
+        <p class="lede" style="text-align:center;"><strong style="color:#fff;">P.S.</strong> Here is the whole offer in one line. You get a real website for your business, built in one day with your photos and your story, and approved by you before it goes live. Pay $500 for the build under We Manage It, upfront or in two payments of $250 with the balance due before launch, plus maintenance at $49 a month for 12 months, a first year total of $1,088, or pay $1,000 upfront for the build and the first year of maintenance. Or pay $1,000 one time under You Manage It and it is yours outright with nothing ongoing. The only step is the call.</p>
       </div>
     </section>
 
@@ -790,8 +821,8 @@
           <label>Which way are you leaning?
             <select name="way">
               <option>Not sure yet. Walk me through both.</option>
-              <option>Way One: $500, we keep it running</option>
-              <option>Way Two: $1,000, take it myself</option>
+              <option>We Manage It: $500 build, $49 a month maintenance</option>
+              <option>You Manage It: $1,000 one time, take it myself</option>
             </select>
           </label>
           <button class="btn" type="submit" style="width:100%;">Request My Callback</button>
