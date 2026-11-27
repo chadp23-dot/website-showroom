@@ -15,7 +15,7 @@
         --orange:#e8490f; --orange-dark:#c53d0c;
         --paper:#f4f7fc; --card:#ffffff; --ink:#1a2436; --muted:#44557a;
         --line:#c9d6ee; --gold:#ffd23f; --radius:18px;
-        --nav-h:64px;
+        --nav-h:60px;
       }
       *{box-sizing:border-box;}
       html{scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 14px);}
@@ -31,53 +31,88 @@
       button,[role="button"],summary,label.tapbtn{ min-height:48px; }
       .wrap{max-width:1120px; margin:0 auto; padding:0 18px;}
 
-      /* Fixed top navigation. Pure CSS, no script. */
+      /* Single compact sticky navigation. Pure CSS checkbox toggle, no script. */
+      html,body{overflow-x:clip;}
       .topnav{
         position:fixed; top:0; left:0; right:0; z-index:60; height:var(--nav-h);
         background:var(--navy-deep); color:#fff;
-        display:flex; flex-direction:column; align-items:stretch;
         box-shadow:0 2px 14px rgba(4,18,43,.35);
       }
+      .nav-toggle{display:none;}
       .toprow{
-        display:flex; align-items:center; justify-content:center; gap:10px;
-        padding:0 14px; flex:1 1 auto; width:100%; min-height:0;
+        display:flex; align-items:center; justify-content:space-between; gap:12px;
+        padding:0 16px; width:100%; max-width:100%; height:var(--nav-h); min-height:0;
       }
-      .topnav .mobilelinks{display:none;}
-      .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; letter-spacing:.03em; color:#fff; text-decoration:none; white-space:nowrap;}
+      .topnav .brand{font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:24px; letter-spacing:.03em; color:#fff; text-decoration:none; white-space:nowrap; flex:0 0 auto; line-height:1;}
       .topnav .brand span{color:var(--orange);}
-      .topnav nav{display:flex; gap:4px; align-items:center; justify-content:center; flex-wrap:nowrap;}
-      .topnav nav a{color:#dbe7ff; text-decoration:none; font-weight:600; font-size:16px; padding:12px 10px; border-radius:10px; white-space:nowrap;}
-      .topnav nav a:hover{background:rgba(255,255,255,.12); color:#fff;}
-      .topnav nav a.portfolio{
+      .topnav nav.desktopnav{display:flex; gap:2px; align-items:center; justify-content:center; flex:1 1 auto; flex-wrap:nowrap; min-width:0;}
+      .topnav nav.desktopnav a{color:#dbe7ff; text-decoration:none; font-weight:600; font-size:16px; padding:10px 9px; border-radius:10px; white-space:nowrap; display:inline-flex; align-items:center; height:40px;}
+      .topnav nav.desktopnav a:hover{background:rgba(255,255,255,.12); color:#fff;}
+      .topnav nav.desktopnav a.portfolio{
         background:var(--orange); color:#fff; font-weight:800; font-family:"Barlow Condensed",sans-serif;
-        letter-spacing:.06em; text-transform:uppercase; font-size:18px; padding:11px 16px; margin:0 4px;
+        letter-spacing:.06em; text-transform:uppercase; font-size:18px; padding:0 16px; margin:0 4px; height:40px;
       }
-      .topnav nav a.portfolio:hover{background:var(--orange-dark); color:#fff;}
+      .topnav nav.desktopnav a.portfolio:hover{background:var(--orange-dark); color:#fff;}
       .topnav .navcall{
         background:var(--orange); color:#fff; font-weight:800; text-decoration:none;
-        padding:12px 18px; border-radius:12px; font-size:17px; white-space:nowrap;
+        padding:0 16px; border-radius:10px; font-size:17px; white-space:nowrap;
+        display:inline-flex; align-items:center; justify-content:center; height:40px; flex:0 0 auto;
       }
-      @media (max-width:760px){ .topnav nav a{padding:12px 6px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav .navcall{padding:12px 12px; font-size:16px;} .topnav nav a.hideS{display:none;} }
+      .topnav .navcall:hover{background:var(--orange-dark);}
+      .mobilebar{display:none;}
+      .mobilemenu{display:none;}
+      @media (max-width:900px){ .topnav nav.desktopnav a{padding:10px 5px; font-size:15px;} .topnav .brand{font-size:21px;} .topnav nav.desktopnav a.hideS{display:none;} }
       @media (max-width:640px){
-        :root{--nav-h:104px;}
-        .toprow{justify-content:space-between; gap:3px; padding:0 5px; flex:0 0 64px; flex-wrap:nowrap;}
-        .topnav .brand{font-size:13px; letter-spacing:0; flex:0 0 auto;}
-        .topnav nav{flex:0 1 auto; gap:2px;}
-        .topnav nav a:not(.portfolio){display:none;}
-        .topnav nav a.portfolio{font-size:11px; padding:7px 5px; margin:0;}
-        .topnav .navcall{font-size:12px; padding:8px 6px; flex:0 0 auto;}
-        .topnav .navcall .navword{display:none;}
-        .topnav nav.mobilelinks{
-          display:flex; flex:0 0 40px; width:100%; gap:4px; align-items:center; justify-content:space-between;
-          background:transparent; border-top:0; padding:2px 10px 8px;
+        :root{--nav-h:56px;}
+        .toprow{justify-content:space-between; gap:6px; padding:0 50px 0 8px; flex-wrap:nowrap;}
+        .topnav .brand{font-size:14px; letter-spacing:0; flex:0 0 auto;}
+        .topnav nav.desktopnav,.topnav .navcall{display:none !important;}
+        .mobilebar{display:flex; align-items:center; gap:5px; flex:0 0 auto; flex-wrap:nowrap;}
+        .mbtn{
+          display:inline-flex; align-items:center; justify-content:center; gap:0;
+          height:34px; min-height:34px; padding:0 8px; border-radius:9px; border:0;
+          background:var(--orange); color:#fff; text-decoration:none; cursor:pointer;
+          font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:12px;
+          letter-spacing:.04em; text-transform:uppercase; line-height:1; white-space:nowrap;
         }
-        .topnav nav.mobilelinks a{
-          display:flex; flex:1 1 0; align-items:center; justify-content:center; min-height:32px;
-          background:transparent; color:#fff; font-size:15px; font-weight:600; padding:6px 2px; border-radius:0; white-space:nowrap;
-          font-family:"Barlow",sans-serif; letter-spacing:0; text-transform:none; line-height:1;
-          text-decoration:none;
+        .mbtn:hover{background:var(--orange-dark); color:#fff;}
+        .mbtn-icon{width:34px; padding:0; flex:0 0 34px;}
+        .mbtn-icon svg{width:17px; height:17px; display:block; flex:none;}
+        /* The checkbox itself is the visible hamburger button: orange, white lines, directly tappable */
+        .nav-toggle{
+          display:block; position:absolute; top:11px; right:8px; z-index:2;
+          width:34px; height:34px; min-height:34px; margin:0; padding:0; cursor:pointer;
+          appearance:none; -webkit-appearance:none; border:0; border-radius:9px;
+          background-color:var(--orange);
+          background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 7h16M4 12h16M4 17h16' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+          background-repeat:no-repeat; background-position:center; background-size:18px 18px;
         }
-        .topnav nav.mobilelinks a:hover{background:transparent; color:#fff; text-decoration:underline;}
+        .nav-toggle:checked{
+          background-color:var(--orange-dark);
+          background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 6l12 12M18 6L6 18' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+        }
+        /* Dropdown menu: overlays below the one bar, does not add to header height */
+        .mobilemenu{
+          display:none; position:absolute; top:100%; left:0; right:0; z-index:59;
+          background:var(--navy-deep); box-shadow:0 14px 24px rgba(4,18,43,.35);
+          padding:6px 10px 10px; flex-direction:column; gap:5px;
+        }
+        .mobilemenu a{
+          display:flex; align-items:center; justify-content:center; height:42px; min-height:42px;
+          color:#fff; text-decoration:none; font-family:"Barlow Condensed",sans-serif; font-weight:800; font-size:17px;
+          letter-spacing:.05em; text-transform:uppercase;
+          padding:0 12px; border-radius:9px; background:var(--orange); white-space:nowrap;
+        }
+        .mobilemenu a:hover,.mobilemenu a:focus{background:var(--orange-dark); color:#fff;}
+        .nav-toggle:checked ~ .mobilemenu{display:flex;}
+      }
+      @media (max-width:380px){
+        .toprow{padding-right:46px; gap:5px;}
+        .topnav .brand{font-size:13px;}
+        .mobilebar{gap:4px;}
+        .mbtn{height:32px; min-height:32px; padding:0 6px; font-size:11px; border-radius:8px;}
+        .mbtn-icon{width:32px; flex-basis:32px; padding:0;}
+        .nav-toggle{width:32px; height:32px; min-height:32px; top:12px; right:6px; border-radius:8px;}
       }
 
       /* Hero */
@@ -277,19 +312,26 @@
   <body id="top">
 
     <header class="topnav">
+      <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Open menu" />
       <div class="toprow">
         <a class="brand" href="#top">Five Second <span>Hook</span></a>
-        <nav>
+        <nav class="desktopnav" aria-label="Primary">
           <a class="portfolio" href="#work">Portfolio</a>
           <a href="#watch">Watch</a>
           <a href="#work">The Sites</a>
           <a href="#offer" class="hideS">The Offer</a>
           <a href="#guarantee" class="hideS">Guarantee</a>
+          <a href="#story" class="hideS">Story</a>
           <a class="portfolio booknav" href="#callback">Book</a>
         </nav>
-        <a class="navcall" href="tel:+12012821356"><span class="navword">Call </span><span class="navnum">201 282 1356</span></a>
+        <a class="navcall" href="tel:+12012821356"><span class="navword">Call&nbsp;</span><span class="navnum">201 282 1356</span></a>
+        <div class="mobilebar" aria-label="Quick actions">
+          <a class="mbtn" href="#work">Portfolio</a>
+          <a class="mbtn" href="#callback">Book</a>
+          <a class="mbtn mbtn-icon" href="tel:+12012821356" aria-label="Call 201 282 1356"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3h3l1.5 4.5-2.1 1.6a12.6 12.6 0 0 0 5.9 5.9l1.6-2.1L21 14.4v3A2.6 2.6 0 0 1 18.3 20C10 19.4 4.6 14 4 5.7A2.6 2.6 0 0 1 6.6 3Z" fill="#fff"/></svg></a>
+        </div>
       </div>
-      <nav class="mobilelinks" aria-label="Sections">
+      <nav class="mobilemenu" aria-label="Sections">
         <a href="#watch">Watch</a>
         <a href="#work">The Sites</a>
         <a href="#offer">The Offer</a>
